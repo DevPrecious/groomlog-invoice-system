@@ -10,7 +10,8 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div>
-                        <form action="" method="POST">
+                        <form action="{{ route('admin.store') }}" method="POST">
+                            @csrf
                             @if(session()->has('success'))
                                 <div class="w-full py-2 px-3 bg-green-500 text-white">
                                     {{ session()->get('success') }}
@@ -56,7 +57,7 @@
                                     <span>Total</span>
                                     <div class="border-b"></div>
                                     <span id="totalvalue">0</span>
-                                    <input type="hidden" name="ttotal" id="ttotal">
+                                    <input type="hidden" name="total" id="ttotal">
                                 </div>
                                 <div>
                                     <button type="submit"

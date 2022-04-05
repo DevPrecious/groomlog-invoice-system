@@ -24,5 +24,8 @@ Route::get('/dashboard', function () {
 
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')->middleware('admin');
+Route::get('admin/invoices', [AdminController::class, 'invoices'])->name('admin.invoices')->middleware('admin');
+Route::get('invoices/{invoice}', [AdminController::class, 'invoice'])->name('admin.invoices.view');
+Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store')->middleware('admin');
 
 require __DIR__.'/auth.php';
