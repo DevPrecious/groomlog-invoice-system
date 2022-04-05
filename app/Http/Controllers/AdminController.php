@@ -44,6 +44,15 @@ class AdminController extends Controller
             ];
             DB::table('sections')->insert($dataforsec);
         }
+        $details = [
+
+            'title' => 'Mail from Groomlog',
+    
+            'email' => $email,
+            'invoice' => $inv->invoice
+    
+        ];
+        \Mail::to($email)->send(new \App\Mail\InvoiceMail($details));
         return back()->with('success', 'Invoice Created Successfully');
     }
 

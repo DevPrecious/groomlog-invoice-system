@@ -48,10 +48,10 @@
                                         ${{ $inv->total }}
                                     </td>
                                     <td class="px-6 space-x-3 flex py-4 text-right">
-                                        <a href="#"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                            <a href="#"
-                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                                        {{-- <a href="#"
+                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
+                                            {{-- <a href="#"
+                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a> --}}
                                             <a href="{{ route('admin.invoices.view', $inv->invoice) }}"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
                                     </td>

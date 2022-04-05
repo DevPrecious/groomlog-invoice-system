@@ -20,9 +20,9 @@
                             @csrf
                             <div class="grid space-y-1">
                                 <label for="email">Receiver Email</label>
-                                <input type="text" name="email" class="rounded-lg p-2 outline-none" id="">
+                                <input type="email" name="email" required class="rounded-lg p-2 outline-none" id="">
                                 <label for="email">Receiver Addtional Info</label>
-                                <input type="text" name="info" class="rounded-lg p-2 outline-none" id="">
+                                <input type="text" name="info" required class="rounded-lg p-2 outline-none" id="">
                                 <label for="email">Services</label>
                                 <select name="services[]" id="" class="rounded-lg p-2 outline-none">
                                     <option value="web development">Web Development</option>
@@ -31,9 +31,9 @@
                                 </select>
                                 <span>Description</span>
                                 <div class="flex space-x-4">
-                                    <input type="text" name="service[]" placeholder="Service"
+                                    <input type="text" required name="service[]" placeholder="Service"
                                         class="w-1/2 rounded-lg p-2 outline-none" id="">
-                                    <input type="number" name="rate[]" placeholder="Rate"
+                                    <input type="number" required name="rate[]" placeholder="Rate"
                                         class="w-1/2 price rounded-lg p-2 outline-none" id="">
                                 </div>
                                 <span class="text-blue-500 cursor-pointer add_button">Add item</span>
@@ -95,9 +95,9 @@
                     x++;
                     var html = `
                     <div class="pt-3 flex space-x-4">
-                        <input type="text" name="service[]" placeholder="Service"
+                        <input type="text" required name="service[]" placeholder="Service"
                             class="w-1/2 rounded-lg p-2 outline-none" id="">
-                        <input type="number" name="rate[]" placeholder="Rate"
+                        <input type="number" required name="rate[]" placeholder="Rate"
                             class="w-1/2 price rounded-lg p-2 outline-none" id="">
                         <span class="text-red-500 cursor-pointer remove_button">remove</span>
                     </div>`;
@@ -125,9 +125,9 @@
                         </select>
                         <span>Description</span>
                         <div class="flex space-x-4">
-                            <input type="text" name="service[]" placeholder="Service"
+                            <input type="text" required name="service[]" placeholder="Service"
                                 class="w-1/2 rounded-lg p-2 outline-none" id="">
-                            <input type="number" name="rate[]" placeholder="Rate"
+                            <input type="number" required name="rate[]" placeholder="Rate"
                                 class="w-1/2 price rounded-lg p-2 outline-none" id="">
                         </div>
                         <span class="text-red-500 cursor-pointer remove_service">remove</span>
@@ -156,9 +156,9 @@
                     x++;
                     var subHtml = `
                     <div class="pt-3 flex space-x-4">
-                         <input type="text" name="service[]" placeholder="Service"
+                         <input type="text" required name="service[]" placeholder="Service"
                             class="w-1/2 rounded-lg p-2 outline-none" id="">
-                        <input type="number" name="rate[]" placeholder="Rate"
+                        <input type="number" required name="rate[]" placeholder="Rate"
                             class="w-1/2 price rounded-lg p-2 outline-none" id="">
                             <span class="text-red-500 cursor-pointer remove_sub">remove</span>
                     </div>
@@ -175,4 +175,6 @@
             });
         });
     </script>
+
+
 </x-app-layout>
