@@ -69,15 +69,16 @@
                         <span class="font-bold text-sm">Description</span>
                         <span class="font-bold text-sm">Amount</span>
                     </div>
-                    @foreach ($invoice as $service)
+                    @foreach ($invoice as $inv => $service)
+                    @foreach($service as $inv)
                     <div>
                         <div class="flex justify-between  rounded-b-lg px-3 py-3">
-                            <span class="font-thin text-sm">Design</span>
+                            <span class="font-thin text-sm">{{ $inv->render }}</span>
                             <div class="grid space-y-1">
                                 <?php $rate_total = 0; ?>
                                 <?php $sub_total = 0; ?>
                                 <?php $total = 0; ?>
-                                @foreach($service->sections as $inv)
+                                @foreach($inv->sections as $inv)
                                 <div class="flex space-x-1">
                                     <span class="font-thin text-sm">{{ $inv->service }} - </span>
                                     <span class="font-thin text-sm">${{ $inv->rate }}</span>
@@ -93,6 +94,7 @@
                         </div>
                         <div class="border-b"></div>
                     </div>
+                    @endforeach
                     @endforeach
                     <div class="flex justify-end bg-gray-300 border-t rounded-b-lg px-3 py-3">
                         <div class="grid space-y-3">

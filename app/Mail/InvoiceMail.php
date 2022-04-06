@@ -29,7 +29,7 @@ class InvoiceMail extends Mailable
     public function build()
     {
         return $this->subject('Mail from Groomlog')
-
-                    ->view('emails.invmail');
+                    ->markdown('emails.invmail');
+                    // ->view('emails.invmail');
     }
 }

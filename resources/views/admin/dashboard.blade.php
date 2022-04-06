@@ -20,23 +20,24 @@
                             @csrf
                             <div class="grid space-y-1">
                                 <label for="email">Receiver Email</label>
-                                <input type="email" name="email" required class="rounded-lg p-2 outline-none" id="">
-                                <label for="email">Receiver Addtional Info</label>
-                                <input type="text" name="info" required class="rounded-lg p-2 outline-none" id="">
+                                <input type="text" required name="email" class="rounded-lg p-2 outline-none" id="">
+                                <label for="email">Receiver Address</label>
+                                {{-- <input type="text" name="info" required class="rounded-lg p-2 outline-none" id=""> --}}
+                                <textarea name="info" id="" class="rounded-lg p-2 outline-none" cols="30" rows="4"></textarea>
                                 <label for="email">Services</label>
-                                <select name="services[]" id="" class="rounded-lg p-2 outline-none">
+                                <select name="services-0" id="" class="rounded-lg p-2 outline-none">
                                     <option value="web development">Web Development</option>
                                     <option value="Smart Contract">Smart Contract</option>
                                     <option value="Product Design">Product Design</option>
                                 </select>
                                 <span>Description</span>
                                 <div class="flex space-x-4">
-                                    <input type="text" required name="service[]" placeholder="Service"
+                                    <input type="text" required name="0-service-0" placeholder="Service"
                                         class="w-1/2 rounded-lg p-2 outline-none" id="">
-                                    <input type="number" required name="rate[]" placeholder="Rate"
+                                    <input type="number" required name="0-rate-0" placeholder="Rate"
                                         class="w-1/2 price rounded-lg p-2 outline-none" id="">
                                 </div>
-                                <span class="text-blue-500 cursor-pointer add_button">Add item</span>
+                                <span class="text-blue-500 cursor-pointer add_button" data-id="0">Add item</span>
                                 <div class="item_wrapper">
                                     {{-- <div class="flex space-x-4">
                                         <input type="text" name="" placeholder="Service"
@@ -91,13 +92,15 @@
             var item_wrapper = $('.item_wrapper');
 
             $(addButton).click(function() {
+                var id = $(this).attr('data-id');
+                itemId = document.querySelectorAll('.item_wrapper > *').length+1;
                 if (x < maxField) {
                     x++;
                     var html = `
                     <div class="pt-3 flex space-x-4">
-                        <input type="text" required name="service[]" placeholder="Service"
+                        <input type="text" required name="${id}-service-${itemId}" placeholder="Service"
                             class="w-1/2 rounded-lg p-2 outline-none" id="">
-                        <input type="number" required name="rate[]" placeholder="Rate"
+                        <input type="number" required name="${id}-rate-${itemId}" placeholder="Rate"
                             class="w-1/2 price rounded-lg p-2 outline-none" id="">
                         <span class="text-red-500 cursor-pointer remove_button">remove</span>
                     </div>`;
@@ -118,16 +121,16 @@
                     var serviceHtml = `
                     <div class="pt-3 w-full grid top-s" id="top_s" data-id="${x}">
                         <span>Service</span>
-                        <select name="services[]" id="" class="rounded-lg p-2 outline-none">
+                        <select name="services-${x}" id="" class="rounded-lg p-2 outline-none">
                             <option value="web development">Web Development</option>
                             <option value="Smart Contract">Smart Contract</option>
                             <option value="Product Design">Product Design</option>
                         </select>
                         <span>Description</span>
                         <div class="flex space-x-4">
-                            <input type="text" required name="service[]" placeholder="Service"
+                            <input type="text" required name="${x}-service-0" placeholder="Service"
                                 class="w-1/2 rounded-lg p-2 outline-none" id="">
-                            <input type="number" required name="rate[]" placeholder="Rate"
+                            <input type="number" required name="${x}-rate-0" placeholder="Rate"
                                 class="w-1/2 price rounded-lg p-2 outline-none" id="">
                         </div>
                         <span class="text-red-500 cursor-pointer remove_service">remove</span>
@@ -148,17 +151,17 @@
             });
 
             $("body").on("click", "#sub_add_item", function() {
-                var id = $(this).attr('id');
+                var id = $(this).attr('data-id');
                 var top_s = $('#top_s').data('id');
                 var $divComponent =  $(this).closest(".top-s");
-
+                itemId = document.querySelectorAll('.sub_add > *').length+1;
                 if (x < maxField) {
                     x++;
                     var subHtml = `
                     <div class="pt-3 flex space-x-4">
-                         <input type="text" required name="service[]" placeholder="Service"
+                         <input type="text" required name="${id}-service-${itemId}" placeholder="Service"
                             class="w-1/2 rounded-lg p-2 outline-none" id="">
-                        <input type="number" required name="rate[]" placeholder="Rate"
+                        <input type="number" required name="${id}-rate-${itemId}" placeholder="Rate"
                             class="w-1/2 price rounded-lg p-2 outline-none" id="">
                             <span class="text-red-500 cursor-pointer remove_sub">remove</span>
                     </div>
@@ -175,6 +178,7 @@
             });
         });
     </script>
+
 
 
 </x-app-layout>
