@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\Section;
+use App\Models\Settings;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -89,9 +90,10 @@ class AdminController extends Controller
 
     public function invoice($invoicex)
     {
+        $setting = Settings::find(1);
         $invoice = Invoice::with('sections')->where('invoice', $invoicex)->get()->groupBy('invoice');
         $invx = Invoice::where('invoice', $invoicex)->first();
         // dd($invx);
-        return view('admin.invoice', compact('invoice', 'invx'));
+        return view('admin.invoice', compact('invoice', 'invx', 'setting'));
     }
 }

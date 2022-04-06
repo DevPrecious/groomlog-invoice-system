@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +26,9 @@ Route::get('/dashboard', function () {
 
 Route::get('admin/home', [AdminController::class, 'index'])->name('admin.home')->middleware('admin');
 Route::get('admin/invoices', [AdminController::class, 'invoices'])->name('admin.invoices')->middleware('admin');
-Route::get('invoices/{invoice}', [AdminController::class, 'invoice'])->name('admin.invoices.view');
+Route::get('admin/settings', [SettingsController::class, 'index'])->name('admin.settings')->middleware('admin');
+Route::post('admin/settings', [SettingsController::class, 'store'])->name('store.settings')->middleware('admin');
+Route::get('invoices/{invoice}', [AdminController::class, 'invoice'])->name('admin.invoices.view')->middleware('admin');
 Route::post('admin/store', [AdminController::class, 'store'])->name('admin.store')->middleware('admin');
 
 require __DIR__.'/auth.php';

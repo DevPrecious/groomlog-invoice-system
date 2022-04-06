@@ -58,8 +58,7 @@
                                 <span class="text-sm font-bold">:</span> 
                             </div>
                             <span dir="rtl">Groomlog <br>
-                                Abeokuta, Itoku <br>
-                                Amosun Shopping complex <br>
+                                {!! str_replace(",", "<br/>", $setting->office_address) !!} <br>
                                 hr@groomlog.com
                         </div>
                     </div>
@@ -108,7 +107,14 @@
                             <div class="grid">
                                 <div class="flex justify-center items-center space-x-4">
                                     <span class="font-bold text-sm">Tax:</span>
-                                    <span>$7.5</span>
+                                    <span>${{ $setting->tax }}</span>
+                                </div>
+                            </div>
+                            <div class="border-b"></div>
+                            <div class="grid">
+                                <div class="flex justify-center items-center space-x-4">
+                                    <span class="font-bold text-sm">Commission Fee:</span>
+                                    <span>${{ $setting->fee }}</span>
                                 </div>
                             </div>
                             <div class="border-b"></div>
@@ -127,6 +133,29 @@
                     <div class="btn-group btn-group-sm d-print-none"> <a href="javascript:window.print()"
                             class="border  px-3 py-1"><i class="fa fa-print"></i> Print</a></div>
                 </footer>
+                <div class="pt-6">
+                    <div class="grid items-center justify-center">
+                        <span class="text-xl text-center">Pay with either</span>
+                        <div class="pt-3"></div>
+                        <div class="flex space-x-8">
+                            <div class="grid">
+                                <span class="text-sm font-bold">Bank Transfer</span>
+                                <div class="text-sm">
+                                    Account name: {{ $setting->account_name }} <br>
+                                    Bank: {{ $setting->bank }} <br>
+                                    Account number: {{ $setting->account_number }} <br>
+                                </div>
+                            </div>
+                            <div class="grid">
+                                <span class="text-sm font-bold">Crypto</span>
+                                <div>
+                                    Eth: {{ $setting->crypto }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-6"></div>
             </div>
             
         </div>
