@@ -10,10 +10,19 @@
     @foreach ($invoices as $invoice => $invoice_list)
         <div class="py-12">
             <div class="w-4/5 mx-auto sm:px-6 lg:px-8">
+                @if (session()->has('success'))
+                    <div class="w-full py-2 px-3 bg-green-500 text-white">
+                        {{ session()->get('success') }}
+                    </div>
+                    <div class="pt-3"></div>
+                @endif
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    SN
+                                </th>
                                 <th scope="col" class="px-6 py-3">
                                     Service
                                 </th>
@@ -23,11 +32,11 @@
                                 <th scope="col" class="px-6 py-3">
                                     Created At
                                 </th>
-                                {{-- <th scope="col" class="px-6 py-3">
-                                    Total
-                                </th> --}}
                                 <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Actions</span>
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Actions
                                 </th>
                             </tr>
                         </thead>
@@ -36,6 +45,10 @@
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                        #{{ $inv->invoice }}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-6 py-4">
                                         {{ $inv->render }}
                                     </th>
                                     <td class="px-6 py-4">
@@ -44,16 +57,42 @@
                                     <td class="px-6 py-4">
                                         {{ $inv->created_at->diffForHumans() }}
                                     </td>
-                                    {{-- <td class="px-6 py-4">
-                                        ${{ $inv->total }}
-                                    </td> --}}
+                                    <td class="px-6 py-4">
+                                        @if($inv->active == 0)
+                                        @if($inv->status == 1)
+                                        Paid
+                                        @else 
+                                        <span class="text-red-500">Unpaid</span>
+                                        @endif
+                                        @else
+                                        <span class="text-red-500">Cancelled</span>
+                                        @endif
+                                    </td>
                                     <td class="px-6 space-x-3 flex py-4 text-right">
                                         {{-- <a href="#"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}
-                                            {{-- <a href="#"
+                                        {{-- <a href="#"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a> --}}
-                                            <a href="{{ route('admin.invoices.view', $inv->invoice) }}"
+                                        <a href="{{ route('admin.invoices.view', $inv->invoice) }}"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View</a>
+                                        @if($inv->active == 0)
+                                        @if($inv->status == 1)
+                                        <a href="{{ route('admin.invoices.res', $inv->invoice) }}"
+                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Unpaid</a>
+                                        @else 
+                                        <a href="{{ route('admin.invoices.res', $inv->invoice) }}"
+                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Paid</a>
+                                        @endif
+                                        @else
+                                        <span class="text-red-500">Cancelled</span>
+                                        @endif
+                                        @if($inv->active == 0)
+                                        <a href="{{ route('admin.invoices.cancel', $inv->invoice) }}"
+                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Cancel</a>
+                                        @else
+                                        <a href="{{ route('admin.invoices.cancel', $inv->invoice) }}"
+                                            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Restore</a>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

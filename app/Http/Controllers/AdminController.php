@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\Section;
 use App\Models\Settings;
+use App\Models\Status;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -84,7 +85,11 @@ class AdminController extends Controller
 
     public function invoices()
     {
-        $invoices = Invoice::orderBy('created_at', 'desc')->get()->groupBy('invoice');
+        $invoices = Invoice::orderBy('invoices.created_at', 'desc')->join('statuses', 'statuses.invoice_no', '=', 'invoices.invoice')->get()->groupBy('invoice');
+        if(empty($invoices)){
+        $invoices = Invoice::orderBy('invoices.created_at', 'desc')->get()->groupBy('invoice');
+
+        }
         // dd($invoices);
         return view('admin.invoices', compact('invoices'));
     }
@@ -96,5 +101,35 @@ class AdminController extends Controller
         $invx = Invoice::where('invoice', $invoicex)->first();
         // dd($invx);
         return view('admin.invoice', compact('invoice', 'invx', 'setting'));
+    }
+
+    public function response($invoice_no){
+        $invoice = Status::where('invoice_no', $invoice_no)->first();
+        if(empty($invoice)){
+            Status::create(['status' => 1, 'active' => 0, 'invoice_no' => $invoice_no]);
+        }else{
+            if($invoice->status == 1){
+                Status::where('invoice_no', $invoice_no)->update(['status' => 0, 'invoice_no' => $invoice_no]);
+            }else{
+                Status::where('invoice_no', $invoice_no)->update(['status' => 1, 'invoice_no' => $invoice_no]);
+            }
+        }
+
+        return back()->with('success', 'Invoice has been updated');
+    }
+
+    public function active($invoice_no){
+        $invoice = Status::where('invoice_no', $invoice_no)->first();
+        if(empty($invoice)){
+            Status::create(['status' => 0, 'active' => 1, 'invoice_no' => $invoice_no]);
+        }else{
+            if($invoice->active == 1){
+                Status::where('invoice_no', $invoice_no)->update(['active' => 0, 'invoice_no' => $invoice_no]);
+            }else{
+                Status::where('invoice_no', $invoice_no)->update(['active' => 1, 'invoice_no' => $invoice_no]);
+            }
+        }
+
+        return back()->with('success', 'Invoice has been updated');
     }
 }
