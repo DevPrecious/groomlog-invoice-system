@@ -9,6 +9,7 @@
         <div class="w-4/5 mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
+                    @if(!empty($setting))
                     <div>
                         <form action="{{ route('admin.store') }}" method="POST">
                             @csrf
@@ -54,12 +55,12 @@
                                 </div>
                                 <hr>
 
-                                <div class="grid justify-end">
+                                {{-- <div class="grid justify-end">
                                     <span>Total</span>
                                     <div class="border-b"></div>
                                     <span id="totalvalue">0</span>
                                     <input type="hidden" name="total" id="ttotal">
-                                </div>
+                                </div> --}}
                                 <div>
                                     <button type="submit"
                                         class="bg-blue-500 text-white px-3 py-1 rounded-lg">Submit</button>
@@ -67,7 +68,12 @@
                             </div>
                         </form>
                     </div>
-
+                    @else
+                    <div class="px-3 bg-yellow-600 text-white text-2xl">Please fill out the settings first <br>
+                    </div>
+                    <div class="pt-4"></div>
+                    <a class="bg-blue-500 text-white px-3 py-1 rounded-lg" href="{{ route('admin.settings') }}" class="text-sm">Settings</a>
+                    @endif
                 </div>
             </div>
         </div>

@@ -13,7 +13,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.dashboard');
+        $setting = Settings::find(1);
+        return view('admin.dashboard', compact('setting'));
     }
 
     public function store(Request $request)
@@ -44,7 +45,7 @@ class AdminController extends Controller
             $inv->receiver_email = $email;
             $inv->receiver_info = $info;
             $inv->render = $services[$key];
-            $inv->total = $total;
+            $inv->total = 80;
             $inv->invoice = $invoice;
             $inv->tax = $tax;
 
@@ -77,7 +78,7 @@ class AdminController extends Controller
             'invoice' => $inv->invoice
 
         ];
-        \Mail::to($email)->send(new \App\Mail\InvoiceMail($details));
+        \Mail::to($email)->send(new \App\Mail\Invoice($details));
         return back()->with('success', 'Invoice Created Successfully');
     }
 

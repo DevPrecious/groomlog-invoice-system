@@ -23,9 +23,9 @@
                                 <th scope="col" class="px-6 py-3">
                                     Created At
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                {{-- <th scope="col" class="px-6 py-3">
                                     Total
-                                </th>
+                                </th> --}}
                                 <th scope="col" class="px-6 py-3">
                                     <span class="sr-only">Actions</span>
                                 </th>
@@ -44,9 +44,9 @@
                                     <td class="px-6 py-4">
                                         {{ $inv->created_at->diffForHumans() }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    {{-- <td class="px-6 py-4">
                                         ${{ $inv->total }}
-                                    </td>
+                                    </td> --}}
                                     <td class="px-6 space-x-3 flex py-4 text-right">
                                         {{-- <a href="#"
                                             class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a> --}}

@@ -58,7 +58,7 @@
                                 <span class="text-sm font-bold">:</span> 
                             </div>
                             <span dir="rtl">Groomlog <br>
-                                {!! str_replace(",", "<br/>", $setting->office_address) !!} <br>
+                               @if(!empty($setting))  {!! str_replace(",", "<br/>", $setting->office_address) !!} @endif <br>
                                 hr@groomlog.com
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                                 </div>
                                 <?php $rate_total += $inv->rate ?>
                                 <?php $sub_total += $rate_total ?>
-                                <?php $total += $sub_total * 0.075 + $sub_total ?>
+                                <?php $total += $sub_total * ($setting->tax / 100) + $setting->fee + $sub_total ?>
                                 @endforeach
                             </div>
                             <div>
@@ -107,14 +107,14 @@
                             <div class="grid">
                                 <div class="flex justify-center items-center space-x-4">
                                     <span class="font-bold text-sm">Tax:</span>
-                                    <span>${{ $setting->tax }}</span>
+                                    <span>${{ $setting->tax ?? '' }}</span>
                                 </div>
                             </div>
                             <div class="border-b"></div>
                             <div class="grid">
                                 <div class="flex justify-center items-center space-x-4">
                                     <span class="font-bold text-sm">Commission Fee:</span>
-                                    <span>${{ $setting->fee }}</span>
+                                    <span>${{ $setting->fee ?? '' }}</span>
                                 </div>
                             </div>
                             <div class="border-b"></div>
@@ -141,15 +141,15 @@
                             <div class="grid">
                                 <span class="text-sm font-bold">Bank Transfer</span>
                                 <div class="text-sm">
-                                    Account name: {{ $setting->account_name }} <br>
-                                    Bank: {{ $setting->bank }} <br>
-                                    Account number: {{ $setting->account_number }} <br>
+                                    Account name: {{ $setting->account_name ?? '' }} <br>
+                                    Bank: {{ $setting->bank ?? '' }} <br>
+                                    Account number: {{ $setting->account_number ?? '' }} <br>
                                 </div>
                             </div>
                             <div class="grid">
                                 <span class="text-sm font-bold">Crypto</span>
                                 <div>
-                                    Eth: {{ $setting->crypto }}
+                                    Eth: {{ $setting->crypto ?? '' }}
                                 </div>
                             </div>
                         </div>
