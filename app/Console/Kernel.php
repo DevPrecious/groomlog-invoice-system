@@ -16,6 +16,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('delete-invoice:cron')->cron('0 */48 * * *');
+        // $schedule->command('delete-invoice:cron')->everyMinute();
     }
 
     /**

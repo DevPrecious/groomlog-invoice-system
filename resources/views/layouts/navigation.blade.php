@@ -26,6 +26,9 @@
                         {{ __('Settings') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <a class='inline-flex items-center px-1 pt-1  text-sm font-medium leading-5 text-gray-700 focus:outline-none transition duration-150 ease-in-out'  href="{{ route('store.activities') }}">Activities</a>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -88,6 +91,10 @@
             <x-responsive-nav-link :href="route('admin.settings')" :active="request()->routeIs('admin.settings')">
                 {{ __('Settings') }}
             </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block pl-3 pr-4 py-2  text-base font-medium focus:outline-none   transition duration-150 ease-in-out" href="{{ route('store.activities') }}">Activities</a>
         </div>
 
         <!-- Responsive Settings Options -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Loggin;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 
@@ -34,5 +35,11 @@ class SettingsController extends Controller
         }
 
         return back()->with('success', 'Settings has been saved');
+    }
+
+    public function activities()
+    {
+        $activities = Loggin::paginate(5);
+        return view('admin.logs', compact('activities'));
     }
 }

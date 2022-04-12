@@ -16,9 +16,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->is_admin) {
+        if(!empty(auth()->user()->is_admin) && auth()->user()->is_admin) {
             return $next($request);
         }
-        return redirect('home')->with('error', 'You are not authorized to view this page.');
+        return redirect('login')->with('error', 'You are not authorized to view this page.');
     }
 }

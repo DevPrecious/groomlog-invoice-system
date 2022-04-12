@@ -83,8 +83,9 @@
                                     <span class="font-thin text-sm">${{ $inv->rate }}</span>
                                 </div>
                                 <?php $rate_total += $inv->rate ?>
-                                <?php $sub_total += $rate_total ?>
-                                <?php $total += $sub_total * ($setting->tax / 100) + $setting->fee + $sub_total ?>
+                                <?php
+                                 $sub_total += $rate_total ?>
+                                <?php $total = $invx->total * 0.075 + 3 + $invx->total ?>
                                 @endforeach
                             </div>
                             <div>
@@ -98,28 +99,28 @@
                     <div class="flex justify-end bg-gray-300 border-t rounded-b-lg px-3 py-3">
                         <div class="grid space-y-3">
                             <div class="grid">
-                                <div class="flex justify-center items-center space-x-4">
+                                <div class="flex justify-end items-center space-x-4">
                                     <span class="font-bold text-sm">Sub Total:</span>
-                                    <span>${{ $sub_total }}</span>
+                                    <span>${{ $invx->total }}</span>
                                 </div>
                             </div>
                             <div class="border-b"></div>
                             <div class="grid">
-                                <div class="flex justify-center items-center space-x-4">
+                                <div class="flex justify-end items-center space-x-4">
                                     <span class="font-bold text-sm">Tax:</span>
-                                    <span>${{ $setting->tax ?? '' }}</span>
+                                    <span>$7.5</span>
                                 </div>
                             </div>
                             <div class="border-b"></div>
                             <div class="grid">
-                                <div class="flex justify-center items-center space-x-4">
+                                <div class="flex justify-end items-center space-x-4">
                                     <span class="font-bold text-sm">Commission Fee:</span>
-                                    <span>${{ $setting->fee ?? '' }}</span>
+                                    <span>$3</span>
                                 </div>
                             </div>
                             <div class="border-b"></div>
                             <div class="grid">
-                                <div class="flex justify-center items-center space-x-4">
+                                <div class="flex justify-end items-center space-x-4">
                                     <span class="font-bold text-sm">Total:</span>
                                     <span>${{ $total }}</span>
                                 </div>
@@ -127,12 +128,6 @@
                         </div>
                     </div>
                 </div>
-                <footer class="text-center p-3">
-                    <p class="text"><strong>NOTE :</strong> You can pay to any of those above</p>
-                    <div class="pt-2"></div>
-                    <div class="btn-group btn-group-sm d-print-none"> <a href="javascript:window.print()"
-                            class="border  px-3 py-1"><i class="fa fa-print"></i> Print</a></div>
-                </footer>
                 <div class="pt-6">
                     <div class="grid items-center justify-center">
                         <span class="text-xl text-center">Pay with either</span>
@@ -155,6 +150,12 @@
                         </div>
                     </div>
                 </div>
+                <footer class="text-center p-3">
+                    <p class="text"><strong>NOTE :</strong> You can pay to any of those above</p>
+                    <div class="pt-2"></div>
+                    <div class="btn-group btn-group-sm d-print-none"> <a href="javascript:window.print()"
+                            class="border  px-3 py-1"><i class="fa fa-print"></i> Print</a></div>
+                </footer>
                 <div class="mb-6"></div>
             </div>
             

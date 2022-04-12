@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sections', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('service');
-            $table->integer('rate');
-            $table->unsignedBigInteger('invoice_id');
+        Schema::table('loggins', function (Blueprint $table) {
+            $table->unsignedBigInteger('invoice_id')->nullable();
             $table->foreign('invoice_id')->references('id')->on('invoices')->onDelete('cascade');
-            $table->timestamps();
         });
     }
 
@@ -30,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sections');
+        Schema::table('loggins', function (Blueprint $table) {
+            //
+        });
     }
 };
